@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "e6aa4b08-6c9f-454b-8328-1aea2359856d",
+		"name": "Autenticando Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastrando",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Gabrielly\",\r\n    \"usuario\": \"LittleBibs@gmail.com\",\r\n    \"senha\": 123456\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/usuarios/cadastrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuarios",
+						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logando",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\": \"LittleBibs@gmail.com\",\r\n    \"senha\": 123456\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/usuarios/logar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"usuarios",
+						"logar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPostagem",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "BasicTGl0dGxlQmlic0BnbWFpbC5jb206MTIzNDU2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/postagens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postagens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetIDPostagem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "GetTitulo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllTema",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "BasicTGl0dGxlQmlic0BnbWFpbC5jb206MTIzNDU2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/temas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"temas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetIDTema",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "GetDescricao",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "PostPostagem",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "BasicTGl0dGxlQmlic0BnbWFpbC5jb206MTIzNDU2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "PostTema",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "BasicTGl0dGxlQmlic0BnbWFpbC5jb206MTIzNDU2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descricao\": \"Livros de Romance\",\r\n    \"imagem\": \"https://liberal.com.br/wp-content/uploads/2021/06/namoro.jpg\",\r\n    \"relacionados\": \"Meg Cabot, Willian Shakespeare\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/temas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"temas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutPostagem",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "PutTema",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePostagem",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteTema",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
