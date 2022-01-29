@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.generation.BlogPessoal.Model.UserLogin;
+import org.generation.BlogPessoal.Model.UsuarioLogin;
 import org.generation.BlogPessoal.Model.Usuario;
 import org.generation.BlogPessoal.Repository.UsuarioRepository;
 import org.generation.BlogPessoal.Service.UsuarioService;
@@ -46,9 +46,10 @@ public class UsuarioController {
 		.orElse(ResponseEntity.notFound().build());
 	}
 	@PostMapping("/logar")
-		public ResponseEntity<UserLogin> Autentication(@RequestBody Optional<UserLogin> user) {
-			return usuarioService.Logar(user).map(resp -> ResponseEntity.ok(resp))
-					.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	public ResponseEntity<UsuarioLogin> login(@RequestBody Optional<UsuarioLogin> usuario) {
+		return usuarioService.autenticarUsuario(usuario)
+			.map(resposta -> ResponseEntity.ok(resposta))
+			.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 	
 	@PostMapping("/cadastrar")

@@ -39,7 +39,7 @@ public class Postagem {
 	private String quote;
 	
 	@NotNull(message = "O atributo preço pago não pode estar vazio")
-	private double preçopago;
+	private double precopago;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
@@ -100,12 +100,12 @@ public class Postagem {
 		this.quote = quote;
 	}
 
-	public double getPreçopago() {
-		return preçopago;
+	public double getPrecopago() {
+		return precopago;
 	}
 
-	public void setPreçopago(double preçopago) {
-		this.preçopago = preçopago;
+	public void setPrecopago(double precopago) {
+		this.precopago = precopago;
 	}
 
 	public Date getData() {

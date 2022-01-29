@@ -29,7 +29,7 @@ public class Usuario {
 	@Size(min = 2, max = 100, message = "O atributo nome deve ter no minimo 2 e no máximo 100 caracteres")
 	private String nome;
 	
-	@Schema(example = "email@email.com.br")
+	@Schema(example = "email@email.com")
 	@NotNull(message= "O atributo Usuário é Obrigatório!")
 	@Email(message = "O atributo Usuário deve ser um email válido!")
 	private String usuario;
@@ -41,7 +41,7 @@ public class Usuario {
 	private String foto;
 	
 	private String tipo;
-	
+
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")

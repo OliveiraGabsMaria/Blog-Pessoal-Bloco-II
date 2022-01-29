@@ -4,8 +4,8 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
-import org.generation.BlogPessoal.Model.UserLogin;
 import org.generation.BlogPessoal.Model.Usuario;
+import org.generation.BlogPessoal.Model.UsuarioLogin;
 import org.generation.BlogPessoal.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,24 +17,24 @@ import org.springframework.web.server.ResponseStatusException;
 public class UsuarioService {
 	
 	@Autowired
-	private UsuarioRepository repository;
+	private UsuarioRepository usuarioRepository;
 	
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
 
-		if (repository.findByUsuario(usuario.getUsuario()).isPresent())
+		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
 			return Optional.empty();
 
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));
 
-		return Optional.of(repository.save(usuario));
+		return Optional.of(usuarioRepository.save(usuario));
 
 	}
 
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 
-		if (repository.findById(usuario.getId()).isPresent()) {
+		if (usuarioRepository.findById(usuario.getId()).isPresent()) {
 
-			Optional<Usuario> buscaUsuario = repository.findByUsuario(usuario.getUsuario());
+			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getUsuario());
 
 			if (buscaUsuario.isPresent()) {
 				if (buscaUsuario.get().getId() != usuario.getId())
@@ -43,57 +43,33 @@ public class UsuarioService {
 
 			usuario.setSenha(criptografarSenha(usuario.getSenha()));
 
-			return Optional.of(repository.save(usuario));
+			return Optional.of(usuarioRepository.save(usuario));
 		}
 
 		return Optional.empty();
 	}
-	public Optional<UserLogin> autenticarUsuario(Optional<UserLogin> user) {
+	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin>  usuarioLogin) {
 
-		Optional<Usuario> usuario = repository.findByUsuario(user.get().getUsuario());
+		Optional<Usuario> usuario = usuarioRepository.findByUsuario( usuarioLogin.get().getUsuario());
 
 		if (usuario.isPresent()) {
-			if (compararSenhas(user.get().getSenha(), usuario.get().getSenha())) {
+			if (compararSenhas( usuarioLogin.get().getSenha(), usuario.get().getSenha())) {
 
-				user.get().setToken(gerarBasicToken(user.get().getUsuario(), user.get().getSenha()));
-				user.get().setId(usuario.get().getId());
-				user.get().setNome(usuario.get().getNome());
-				user.get().setSenha(usuario.get().getSenha());
-				user.get().setUsuario(usuario.get().getUsuario());
-				user.get().setFoto(usuario.get().getFoto());
-				user.get().setTipo(usuario.get().getTipo());
+				 usuarioLogin.get().setToken(gerarBasicToken(usuario.get().getUsuario(), usuario.get().getSenha()));
+				 usuarioLogin.get().setId(usuario.get().getId());
+				 usuarioLogin.get().setNome(usuario.get().getNome());
+				 usuarioLogin.get().setSenha(usuario.get().getSenha());
+				 usuarioLogin.get().setUsuario(usuario.get().getUsuario());
+				 usuarioLogin.get().setFoto(usuario.get().getFoto());
+				 usuarioLogin.get().setTipo(usuario.get().getTipo());
 				
-				return user;
+				return  usuarioLogin;
 
 			}
 		}
 
 		return Optional.empty();
 
-	}
-	public Optional<UserLogin> Logar(Optional<UserLogin> user) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<Usuario> usuario = repository.findByUsuario(user.get().getUsuario());
-		
-		if(usuario.isPresent()) {
-			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
-				
-				String auth = user.get().getUsuario() + ":" + user.get().getSenha();
-				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
-				String authHeader = "Basic" + new String(encodedAuth);
-				
-				user.get().setToken(authHeader);
-				user.get().setId(usuario.get().getId());
-				user.get().setNome(usuario.get().getNome());
-				user.get().setSenha(usuario.get().getSenha());
-				user.get().setTipo(usuario.get().getTipo());
-				user.get().setFoto(usuario.get().getFoto());
-				
-				return user;
-			}
-		}
-		
-		return Optional.empty();
 	}
 
 	private String criptografarSenha(String senha) {

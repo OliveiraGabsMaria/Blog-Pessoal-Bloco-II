@@ -1,6 +1,6 @@
 package org.generation.BlogPessoal.Model;
 
-public class UserLogin {
+public class UsuarioLogin {
 	
 	private long id;
 	
@@ -16,7 +16,7 @@ public class UserLogin {
 	
 	private String tipo;
 
-	
+
 	public long getId() {
 		return id;
 	}
